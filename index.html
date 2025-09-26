@@ -49,31 +49,34 @@
   <p id="form-status" role="status" aria-live="polite"></p>
 
   <script>
-    const form = document.getElementById("contact-form");
+  const form = document.getElementById("contact-form");
 
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-      const data = new FormData(form);
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const data = new FormData(form);
 
-      try {
-        let response = await fetch("https://formspree.io/f/mqaykvad", {
-          method: "POST",
-          body: data,
-          headers: { "Accept": "application/json" }
-        });
+    try {
+      let response = await fetch("https://formspree.io/f/mqaykvad", {
+        method: "POST",
+        body: data,
+        headers: { "Accept": "application/json" },
+        redirect: "manual" // 🚀 запрещаем автоматический редирект на formspree
+      });
 
-        if (response.ok) {
-          window.location.href = "thankyou.html"; // ✅ редирект на твою страницу
-        } else {
-          document.getElementById("form-status").textContent =
-            "Something went wrong. Please try again.";
-        }
-      } catch (error) {
+      if (response.status === 200 || response.status === 302) {
+        // если всё ок — перебрасываем на свою страницу
+        window.location.href = "thankyou.html";
+      } else {
         document.getElementById("form-status").textContent =
-          "Network error. Please try again later.";
+          "Something went wrong. Please try again.";
       }
-    });
-  </script>
+    } catch (error) {
+      document.getElementById("form-status").textContent =
+        "Network error. Please try again later.";
+    }
+  });
+</script>
+
 </section>
   <footer>
     <p>© 2025 Demo Landing</p>
