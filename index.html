@@ -4,82 +4,166 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Demo Landing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
-    /* Базовый reset для box-sizing */
-    *, *::before, *::after { box-sizing: border-box; }
-    body { margin: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #222; }
-    header { background: #4CAF50; color: white; padding: 20px; text-align: center; }
-    section { padding: 20px; max-width: 800px; margin: 0 auto; }
-    .cta { background: #f4f4f4; padding: 20px; text-align: center; }
-    form { display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin: 0 auto; }
-    label { text-align: left; font-size: 0.95rem; }
-    input { padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 4px; }
-    button { padding: 10px; font-size: 1rem; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
-    button:disabled { opacity: 0.6; cursor: not-allowed; }
-    button:hover:not(:disabled) { background: #45a049; }
-    #form-status { margin-top: 10px; min-height: 1.2em; }
-    /* Видимый фокус для клавиатуры */
-    input:focus, button:focus { outline: 3px solid rgba(76, 175, 80, 0.3); outline-offset: 2px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #f5f5f7; color: #1c1c1e; line-height: 1.6; }
+
+    header {
+      background: linear-gradient(135deg, #580da8, #ffeb3c);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    }
+
+    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    header p { font-size: 1.2rem; opacity: 0.9; }
+
+    section {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #2575fc;
+      text-align: center;
+      /* Градиент */
+      background: linear-gradient(135deg, #580da8, #ffeb3c);
+      -webkit-background-clip: text; /* для WebKit-браузеров */
+      -webkit-text-fill-color: transparent; /* делаем текст прозрачным, чтобы был виден градиент */
+    }
+
+    section p {
+      font-size: 1.1rem;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+
+    .cta {
+      background: #fff;
+      padding: 60px 20px;
+      border-radius: 20px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+      text-align: center;
+      margin-bottom: 60px;
+      transition: transform 0.3s ease;
+    }
+
+    .cta:hover { transform: translateY(-5px); }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    input {
+      padding: 15px;
+      font-size: 1rem;
+      border-radius: 15px;
+      border: 1px solid #d1d1d6;
+      transition: all 0.3s ease;
+      background: #fefefe;
+    }
+
+    input:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 10px rgba(37, 117, 252, 0.3);
+      outline: none;
+    }
+
+    button {
+      background: #2575fc;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      padding: 15px;
+      border-radius: 15px;
+      font-size: 1rem;
+      box-shadow: 0 8px 16px rgba(37,117,252,0.2);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(37,117,252,0.25);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
     @media (max-width: 600px) {
-      header, section, .cta, footer { padding: 15px; }
-      h1 { font-size: 1.5rem; }
+      header h1 { font-size: 2rem; }
+      section h2 { font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>My Landing Page</h1>
-    <p>Simple, responsive, and clean</p>
+    <p>Modern, clean, responsive</p>
   </header>
 
   <section>
     <h2>About This Project</h2>
-    <p>This is a demo landing page for my portfolio. Here I demonstrate basic front-end skills: responsive design, a contact form, and site deployment.</p>
+    <p>This demo landing page demonstrates modern front-end skills: responsive design, interactive contact form, and GitHub deployment.</p>
   </section>
 
   <section class="cta">
-  <h2>Contact Me</h2>
+    <h2>Contact Me</h2>
+    <form id="contact-form">
+      <input type="email" name="email" placeholder="Your email" required>
+      <button type="submit">Send</button>
+    </form>
+    <p id="form-status" role="status" aria-live="polite"></p>
+  </section>
 
-  <form id="contact-form">
-    <input type="email" name="email" placeholder="Your email" required>
-    <button type="submit">Send</button>
-  </form>
-
-  <!-- только один блок для статуса -->
-  <p id="form-status" role="status" aria-live="polite"></p>
-
-  <script>
-  const form = document.getElementById("contact-form");
-
-  form.addEventListener("submit", async function (event) {
-    event.preventDefault();
-    const data = new FormData(form);
-
-    try {
-      let response = await fetch("https://formspree.io/f/mqaykvad", {
-        method: "POST",
-        body: data,
-        headers: { "Accept": "application/json" },
-        redirect: "manual" // 🚀 запрещаем автоматический редирект на formspree
-      });
-
-      if (response.status === 200 || response.status === 302) {
-        // если всё ок — перебрасываем на свою страницу
-        window.location.href = "thankyou.html";
-      } else {
-        document.getElementById("form-status").textContent =
-          "Something went wrong. Please try again.";
-      }
-    } catch (error) {
-      document.getElementById("form-status").textContent =
-        "Network error. Please try again later.";
-    }
-  });
-</script>
-
-</section>
   <footer>
     <p>© 2025 Demo Landing</p>
   </footer>
+
+  <script>
+    const form = document.getElementById("contact-form");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+      const data = new FormData(form);
+
+      try {
+        let response = await fetch("https://formspree.io/f/mqaykvad", {
+          method: "POST",
+          body: data,
+          headers: { "Accept": "application/json" },
+          redirect: "manual"
+        });
+
+        if (response.ok || response.status === 302) {
+          window.location.href = "thankyou.html";
+        } else {
+          document.getElementById("form-status").textContent =
+            "Something went wrong. Please try again.";
+        }
+      } catch (error) {
+        document.getElementById("form-status").textContent =
+          "Network error. Please try again later.";
+      }
+    });
+  </script>
 </body>
 </html>
