@@ -40,12 +40,14 @@
   <section class="cta">
     <h2>Contact Me</h2>
     <!-- action можно указать для прогрессивного улучшения (fallback) -->
-    <form action="https://formspree.io/f/mqaykvad?redirect=https://vadym134.github.io/demo_landing/thankyou.html" method="POST">
+    <form action="https://formspree.io/f/mqaykvad" method="POST">
   <input type="email" name="email" placeholder="Your email" required>
+  
+  <!-- скрытое поле для редиректа -->
+  <input type="hidden" name="_redirect" value="https://vadym134.github.io/demo_landing/thankyou.html">
+
   <button type="submit">Send</button>
 </form>
-
-
 
     <!-- aria-live чтобы скринридеры прочитали изменение текста -->
     <p id="form-status" role="status" aria-live="polite"></p>
