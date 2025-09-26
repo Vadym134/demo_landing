@@ -40,13 +40,36 @@
   <section class="cta">
     <h2>Contact Me</h2>
     <!-- action можно указать для прогрессивного улучшения (fallback) -->
-    <form action="https://formspree.io/f/mqaykvad" method="POST">
+    <form id="contact-form">
   <input type="email" name="email" placeholder="Your email" required>
-  <!-- Скрытое поле: после успешной отправки откроется твоя страница -->
-  <input type="hidden" name="_redirect" value="https://vadym134.github.io/demo_landing/thankyou.html">
   <button type="submit">Send</button>
 </form>
+<p id="form-status" role="status" aria-live="polite"></p>
 
+<script>
+  const form = document.getElementById("contact-form");
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const data = new FormData(form);
+
+    try {
+      let response = await fetch("https://formspree.io/f/mqaykvad", {
+        method: "POST",
+        body: data,
+        headers: { "Accept": "application/json" }
+      });
+
+      if (response.ok) {
+        window.location.href = "thankyou.html"; // ✅ редирект на твою страницу
+      } else {
+        document.getElementById("form-status").textContent = "Something went wrong. Please try again.";
+      }
+    } catch (error) {
+      document.getElementById("form-status").textContent = "Network error. Please try again later.";
+    }
+  });
+</script>
 
     <!-- aria-live чтобы скринридеры прочитали изменение текста -->
     <p id="form-status" role="status" aria-live="polite"></p>
